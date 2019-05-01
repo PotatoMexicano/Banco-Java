@@ -17,26 +17,26 @@ public class Conexao extends Thread {
     public static Connection connection = null;
     public static Statement statement = null;
     public static ResultSet r = null;
-
-    public void run(int id) {
-
-        while (true) {
-            corrente = getCorrente(id);
-            poupança = getPoup(id);
-        }
-    }
-
-    public static Usuarios login(String agencia, String conta, String senha) {
+    
+    
+    public static void connection() throws SQLException{
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
-            //Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Ops");
         }
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/u736501739_bank?zeroDateTimeBehavior=convertToNull","oihi","12345678");   
+    }    
+    
+    
+    public void run(int id) {
+        corrente = getCorrente(id);
+        poupança = getPoup(id);           
+    }
 
+    public static Usuarios login(String agencia, String conta, String senha){
         try {
-
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/u736501739_bank?zeroDateTimeBehavior=convertToNull", "bancario", "Pimenta10");
+            connection();
             statement = connection.createStatement();
             r = statement.executeQuery("SELECT * FROM usuarios WHERE conta = " + conta + " AND agencia = " + agencia + " AND senha = '" + senha + "';");
 
@@ -83,13 +83,7 @@ public class Conexao extends Thread {
 
     public static Corrente getCorrente(int id) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Ops");
-        }
-
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/u736501739_bank?zeroDateTimeBehavior=convertToNull", "bancario", "Pimenta10");
+            connection();
             statement = connection.createStatement();
             r = statement.executeQuery("SELECT * FROM corrente WHERE id_usuario = '" + id + "';");
 
@@ -116,13 +110,7 @@ public class Conexao extends Thread {
     
     public static Poupança getPoup(int id) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Ops");
-        }
-
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/u736501739_bank?zeroDateTimeBehavior=convertToNull", "bancario", "Pimenta10");
+            connection();
             statement = connection.createStatement();
             r = statement.executeQuery("SELECT * FROM poupanca WHERE id_usuario = '" + id + "';");
 
@@ -149,12 +137,7 @@ public class Conexao extends Thread {
 
     public static List<Extratos> getExtratos(int id) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Ops");
-        }
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/u736501739_bank?zeroDateTimeBehavior=convertToNull", "bancario", "Pimenta10");
+            connection();
             statement = connection.createStatement();
             r = statement.executeQuery("SELECT * FROM extratos WHERE id_usuario = " + id);
 

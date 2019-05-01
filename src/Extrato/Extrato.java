@@ -11,6 +11,7 @@ public final class Extrato extends javax.swing.JFrame {
     public static DefaultTableModel modelo;
 
     public Extrato(Usuarios usuario, double saldo) {
+        
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         Extrato.usuario = usuario;
@@ -18,7 +19,7 @@ public final class Extrato extends javax.swing.JFrame {
         
         jLabel1.setText("R$ " + String.format("%.2f", Extrato.saldo));
         modelo = (DefaultTableModel) jTable1.getModel();
-
+        
         loadTable(Extrato.usuario);
 
     }
@@ -26,6 +27,7 @@ public final class Extrato extends javax.swing.JFrame {
     public void loadTable(Usuarios usuario) {
 
         for(Extratos e: Conexao.getExtratos(usuario.getId())){
+            modelo.setRowCount(0);
             modelo.addRow(new Object[]{
                 e.getNumeroConta(),
                 e.getTipo(),                
@@ -85,8 +87,8 @@ public final class Extrato extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();

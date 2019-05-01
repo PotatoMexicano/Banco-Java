@@ -5,6 +5,8 @@ import Extrato.Extrato;
 import Services.Conexao;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class Menu extends javax.swing.JFrame {
 
@@ -17,7 +19,7 @@ public final class Menu extends javax.swing.JFrame {
 
     public double saldo;
 
-    public Menu(Usuarios usuario) {
+    public Menu(Usuarios usuario){
         initComponents();
 
         Menu.usuario = usuario;
@@ -41,6 +43,10 @@ public final class Menu extends javax.swing.JFrame {
         public void run() {
             while (true) {
                 loadConfig(usuario);
+                try {
+                    Thread.sleep(9000);
+                } catch (InterruptedException ex) {
+                }
             }
         }
 
