@@ -25,7 +25,7 @@ public class Conexao extends Thread {
         } catch (ClassNotFoundException ex) {
             System.out.println("Ops");
         }
-        connection = DriverManager.getConnection("jdbc:mysql://192.168.0.104:3306/u736501739_bank?zeroDateTimeBehavior=convertToNull","bancario","12345678");   
+        connection = DriverManager.getConnection("jdbc:mysql://172.16.15.110:3306/u736501739_bank?zeroDateTimeBehavior=convertToNull","oihi","pineapple2019@@");   
     }    
     
     
